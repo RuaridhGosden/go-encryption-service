@@ -1,7 +1,15 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"net/http"
+)
 
 func main() {
-	fmt.Println("Hello, Encryption Service!")
+	http.HandleFunc("/ping", func(w http.ResponseWriter, r *http.Request) {
+		fmt.Fprintf(w, "pong")
+	})
+
+	fmt.Println("Server starting on :8080")
+	http.ListenAndServe(":8080", nil)
 }
